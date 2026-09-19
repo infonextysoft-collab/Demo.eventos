@@ -7,18 +7,21 @@ function GalleryCard(props) {
 
   return (
     <article class="gallery-card">
-      <img src={item.imagen} alt={item.titulo} loading="lazy" />
+      <div class="gallery-card__image">
+        <img src={item.imagen} alt={item.titulo} loading="lazy" />
+      </div>
 
-      <div class="gallery-card__overlay">
-        <span>{item.categoriaNombre}</span>
+      <div class="gallery-card__body">
         <h3>{item.titulo}</h3>
+        <p>{item.descripcion}</p>
 
         <a
           href={createGalleryWhatsAppLink(item)}
           target="_blank"
           rel="noopener noreferrer"
+          class="gallery-card__link"
         >
-          Quiero algo similar
+          Quiero algo similar →
         </a>
       </div>
     </article>

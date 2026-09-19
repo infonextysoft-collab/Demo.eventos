@@ -15,6 +15,21 @@ import { testimonials } from "../../data/testimonials";
 
 import "./Home.css";
 
+const steps = [
+  {
+    titulo: "Nos cuentas tu idea",
+    texto: "Indicas el tipo de evento, fecha, lugar, estilo y presupuesto aproximado.",
+  },
+  {
+    titulo: "Preparamos una propuesta",
+    texto: "Te orientamos con colores, temática, elementos decorativos y opciones disponibles.",
+  },
+  {
+    titulo: "Coordinamos el montaje",
+    texto: "Confirmamos detalles, horarios, ubicación y preparación del servicio elegido.",
+  },
+];
+
 function Home() {
   const featuredServices = services.filter((service) => service.destacado).slice(0, 3);
   const featuredPackages = packages.slice(0, 3);
@@ -23,58 +38,57 @@ function Home() {
   return (
     <div class="home">
       <section class="home-hero">
-        <div class="home-hero__container">
-          <div class="home-hero__content fade-up">
-            <span class="home-hero__label">Detalles para eventos</span>
+        <div class="page-container home-hero__container">
+          <div class="home-hero__content">
+            <span class="home-hero__label">Decoración para eventos</span>
 
             <h1>Decoración y detalles para momentos inolvidables</h1>
 
             <p>
-              Creamos mesas temáticas, arreglos con globos, detalles personalizados
-              y decoraciones para cumpleaños, baby showers, aniversarios, pedidas
+              Mesas temáticas, arreglos con globos, detalles personalizados y
+              decoraciones para cumpleaños, baby showers, aniversarios, pedidas
               de mano y eventos especiales.
             </p>
 
             <div class="home-hero__actions">
+              <WhatsAppButton>Cotizar por WhatsApp</WhatsAppButton>
+
               <A href="/servicios" class="btn btn-secondary">
                 Ver servicios
               </A>
-
-              <WhatsAppButton>
-                Cotizar por WhatsApp
-              </WhatsAppButton>
             </div>
+
+            <ul class="home-hero__facts">
+              <li>Precios desde S/ 80</li>
+              <li>Montaje incluido</li>
+              <li>Respuesta el mismo día</li>
+            </ul>
           </div>
 
-          <div class="home-hero__image fade-up">
+          <div class="home-hero__image">
             <img
               src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80"
-              alt="Decoración elegante para eventos"
+              alt="Mesa decorada con flores y velas para un evento"
             />
-
-            <div class="home-hero__card">
-              <strong>Desde S/ 80.00</strong>
-              <span>Detalles personalizados</span>
-            </div>
           </div>
         </div>
       </section>
 
-      <section class="home-services section-padding">
+      <section class="section-padding">
         <div class="page-container">
           <div class="home-section-header">
             <SectionTitle
               label="Servicios"
-              title="Soluciones para cada ocasión"
+              title="Nuestros servicios"
               description="Elige el tipo de decoración o detalle que necesitas y solicita una cotización personalizada."
             />
 
             <A href="/servicios" class="home-section-link">
-              Ver todos
+              Ver todos los servicios →
             </A>
           </div>
 
-          <div class="home-grid home-grid--three">
+          <div class="card-grid">
             <For each={featuredServices}>
               {(service) => <ServiceCard service={service} />}
             </For>
@@ -82,69 +96,67 @@ function Home() {
         </div>
       </section>
 
-      <section class="home-packages section-padding">
+      <section class="section-padding section-alt">
         <div class="page-container">
           <SectionTitle
             label="Paquetes"
-            title="Paquetes pensados para diferentes eventos"
+            title="Paquetes para cada tipo de evento"
             description="Opciones listas para celebraciones pequeñas, eventos especiales y decoraciones completas."
             center
           />
 
-          <div class="home-grid home-grid--three">
+          <div class="card-grid home-packages__grid">
             <For each={featuredPackages}>
               {(item) => <PackageCard package={item} />}
             </For>
           </div>
+
+          <div class="home-packages__more">
+            <A href="/paquetes" class="home-section-link">
+              Ver todos los paquetes →
+            </A>
+          </div>
         </div>
       </section>
 
-      <section class="home-process section-padding">
+      <section class="section-padding">
         <div class="page-container">
           <SectionTitle
             label="Proceso"
             title="Así trabajamos tu evento"
-            description="Te acompañamos desde la idea inicial hasta el montaje final del detalle o decoración."
+            description="Te acompañamos desde la idea inicial hasta el montaje final."
             center
           />
 
-          <div class="home-process__grid">
-            <div class="home-process__item">
-              <span>01</span>
-              <h3>Nos cuentas tu idea</h3>
-              <p>Indicas el tipo de evento, fecha, lugar, estilo y presupuesto aproximado.</p>
-            </div>
-
-            <div class="home-process__item">
-              <span>02</span>
-              <h3>Preparamos una propuesta</h3>
-              <p>Te orientamos con colores, temática, elementos decorativos y opciones disponibles.</p>
-            </div>
-
-            <div class="home-process__item">
-              <span>03</span>
-              <h3>Coordinamos el montaje</h3>
-              <p>Confirmamos detalles, horarios, ubicación y preparación del servicio elegido.</p>
-            </div>
-          </div>
+          <ol class="home-process">
+            <For each={steps}>
+              {(step, index) => (
+                <li class="home-process__item">
+                  <span class="home-process__number">{index() + 1}</span>
+                  <h3>{step.titulo}</h3>
+                  <p>{step.texto}</p>
+                </li>
+              )}
+            </For>
+          </ol>
         </div>
       </section>
 
-      <section class="home-gallery section-padding">
+      <section class="section-padding section-alt">
         <div class="page-container">
           <div class="home-section-header">
             <SectionTitle
               label="Galería"
-              title="Inspiración para tu próximo evento"
-              description="Explora estilos, colores y decoraciones que pueden servir como referencia para tu celebración."
+              title="Trabajos realizados"
+              description="Algunas decoraciones que pueden servir como referencia para tu celebración."
             />
 
             <A href="/galeria" class="home-section-link">
-              Ver galería
+              Ver galería →
             </A>
           </div>
 
-          <div class="home-grid home-grid--three">
+          <div class="card-grid">
             <For each={featuredGallery}>
               {(item) => <GalleryCard item={item} />}
             </For>
@@ -152,16 +164,15 @@ function Home() {
         </div>
       </section>
 
-      <section class="home-testimonials section-padding">
+      <section class="section-padding">
         <div class="page-container">
           <SectionTitle
             label="Opiniones"
-            title="Clientes que confiaron en nosotros"
-            description="La atención personalizada y el cuidado de cada detalle hacen la diferencia."
+            title="Lo que dicen nuestros clientes"
             center
           />
 
-          <div class="home-grid home-grid--three">
+          <div class="card-grid">
             <For each={testimonials}>
               {(testimonial) => <TestimonialCard testimonial={testimonial} />}
             </For>
@@ -173,15 +184,14 @@ function Home() {
         <div class="page-container">
           <div class="home-cta__box">
             <div>
-              <span>Cotización personalizada</span>
               <h2>¿Tienes un evento próximo?</h2>
               <p>
-                Escríbenos por WhatsApp y cuéntanos tu idea. Te ayudamos a convertirla
-                en una decoración especial.
+                Cuéntanos tu idea y te enviamos una cotización personalizada sin
+                compromiso.
               </p>
             </div>
 
-            <A href="/reservar" class="btn btn-primary">
+            <A href="/reservar" class="btn home-cta__button">
               Solicitar cotización
             </A>
           </div>

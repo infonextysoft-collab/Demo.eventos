@@ -4,19 +4,17 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import ServiceCard from "../../components/ServiceCard/ServiceCard";
 import { services } from "../../data/services";
 
-import "./Services.css";
-
 function Services() {
   return (
-    <section class="services-page section-padding">
+    <section class="section-padding">
       <div class="page-container">
         <SectionTitle
           label="Servicios"
-          title="Servicios para eventos especiales"
+          title="Todos nuestros servicios"
           description="Elige el servicio que mejor se adapte a tu celebración y solicita una cotización personalizada por WhatsApp."
         />
 
-        <div class="services-page__grid">
+        <div class="card-grid">
           <For each={services}>
             {(service) => <ServiceCard service={service} />}
           </For>

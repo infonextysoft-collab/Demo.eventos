@@ -11,26 +11,35 @@ import "./Packages.css";
 
 function Packages() {
   return (
-    <section class="packages-page section-padding">
-      <div class="page-container">
-        <SectionTitle
-          label="Paquetes"
-          title="Paquetes para distintos tipos de eventos"
-          description="Elige una opción base o solicita una propuesta personalizada según tu idea, espacio, fecha y presupuesto."
-          center
-        />
+    <>
+      <section class="section-padding">
+        <div class="page-container">
+          <SectionTitle
+            label="Paquetes"
+            title="Paquetes para distintos tipos de eventos"
+            description="Elige una opción base o solicita una propuesta personalizada según tu idea, espacio, fecha y presupuesto."
+            center
+          />
 
-        <div class="packages-page__grid">
-          <For each={packages}>
-            {(item) => <PackageCard package={item} />}
-          </For>
+          <div class="packages-page__grid">
+            <For each={packages}>
+              {(item) => <PackageCard package={item} />}
+            </For>
+          </div>
+
+          <p class="packages-page__note">
+            Los precios son referenciales y pueden variar según el tamaño del evento,
+            la ubicación y el nivel de personalización.
+          </p>
         </div>
+      </section>
 
-        <div class="packages-page__faq">
+      <section class="section-padding section-alt">
+        <div class="page-container packages-page__faq">
           <SectionTitle
             label="Preguntas frecuentes"
             title="Antes de solicitar una cotización"
-            description="Resuelve dudas comunes sobre reservas, precios, personalización y montaje."
+            center
           />
 
           <div class="packages-page__faq-list">
@@ -39,8 +48,8 @@ function Packages() {
             </For>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

@@ -2,8 +2,6 @@ export const services = [
   {
     id: 1,
     nombre: "Mesa temática para cumpleaños",
-    categoria: "cumpleanos",
-    categoriaNombre: "Cumpleaños",
     precioDesde: 250,
     tiempo: "2 a 3 horas",
     reserva: "5 días antes",
@@ -32,8 +30,6 @@ export const services = [
   {
     id: 2,
     nombre: "Arreglo con globos",
-    categoria: "globos",
-    categoriaNombre: "Globos",
     precioDesde: 120,
     tiempo: "1 a 2 horas",
     reserva: "3 días antes",
@@ -61,8 +57,6 @@ export const services = [
   {
     id: 3,
     nombre: "Decoración para baby shower",
-    categoria: "baby-shower",
-    categoriaNombre: "Baby shower",
     precioDesde: 320,
     tiempo: "3 a 4 horas",
     reserva: "7 días antes",
@@ -91,8 +85,6 @@ export const services = [
   {
     id: 4,
     nombre: "Decoración para aniversario",
-    categoria: "aniversarios",
-    categoriaNombre: "Aniversarios",
     precioDesde: 280,
     tiempo: "2 a 3 horas",
     reserva: "5 días antes",
@@ -120,12 +112,10 @@ export const services = [
   {
     id: 5,
     nombre: "Pedida de mano",
-    categoria: "pedida",
-    categoriaNombre: "Pedida de mano",
     precioDesde: 450,
     tiempo: "3 a 5 horas",
     reserva: "10 días antes",
-    destacado: true,
+    destacado: false,
     imagen:
       "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1000&q=80",
     descripcion:
@@ -150,8 +140,6 @@ export const services = [
   {
     id: 6,
     nombre: "Cajas sorpresa personalizadas",
-    categoria: "detalles",
-    categoriaNombre: "Detalles",
     precioDesde: 80,
     tiempo: "1 día",
     reserva: "2 días antes",
@@ -179,8 +167,6 @@ export const services = [
   {
     id: 7,
     nombre: "Decoración para bautizo",
-    categoria: "bautizos",
-    categoriaNombre: "Bautizos",
     precioDesde: 350,
     tiempo: "3 a 4 horas",
     reserva: "7 días antes",
@@ -208,8 +194,6 @@ export const services = [
   {
     id: 8,
     nombre: "Decoración corporativa",
-    categoria: "corporativo",
-    categoriaNombre: "Corporativo",
     precioDesde: 500,
     tiempo: "4 a 6 horas",
     reserva: "10 días antes",

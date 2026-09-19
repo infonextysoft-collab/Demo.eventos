@@ -7,29 +7,28 @@ function Footer() {
     <footer class="footer">
       <div class="footer__container">
         <div class="footer__brand-box">
-          <div class="footer__logo">E</div>
-
-          <div>
-            <h3>Elegance Events</h3>
-            <p>
-              Creamos detalles, decoración y experiencias especiales para cumpleaños,
-              aniversarios, baby showers, pedidas de mano y eventos personalizados.
-            </p>
-          </div>
+          <h3>Elegance Events</h3>
+          <p>
+            Decoración y detalles para cumpleaños, aniversarios, baby showers,
+            pedidas de mano y eventos especiales.
+          </p>
         </div>
 
-        <div class="footer__links">
-          <A href="/">Inicio</A>
-          <A href="/servicios">Servicios</A>
-          <A href="/paquetes">Paquetes</A>
-          <A href="/galeria">Galería</A>
-          <A href="/reservar">Reservar</A>
+        <div>
+          <h4>Navegación</h4>
+          <nav class="footer__links">
+            <A href="/">Inicio</A>
+            <A href="/servicios">Servicios</A>
+            <A href="/paquetes">Paquetes</A>
+            <A href="/galeria">Galería</A>
+            <A href="/reservar">Reservar</A>
+          </nav>
         </div>
 
         <div class="footer__info">
-          <p>Atención por WhatsApp</p>
-          <strong>+51 999 999 999</strong>
-          <span>Lunes a sábado · 9:00 a.m. - 8:00 p.m.</span>
+          <h4>Contacto</h4>
+          <p>WhatsApp: +51 999 999 999</p>
+          <p>Lunes a sábado · 9:00 a.m. – 8:00 p.m.</p>
         </div>
       </div>
 

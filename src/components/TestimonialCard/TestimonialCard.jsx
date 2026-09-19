@@ -4,16 +4,16 @@ function TestimonialCard(props) {
   const testimonial = props.testimonial;
 
   return (
-    <article class="testimonial-card">
-      <div class="testimonial-card__stars">★★★★★</div>
+    <figure class="testimonial-card">
+      <div class="testimonial-card__stars" aria-label="5 de 5 estrellas">★★★★★</div>
 
-      <p>“{testimonial.comentario}”</p>
+      <blockquote>“{testimonial.comentario}”</blockquote>
 
-      <div class="testimonial-card__author">
+      <figcaption class="testimonial-card__author">
         <strong>{testimonial.nombre}</strong>
         <span>{testimonial.evento}</span>
-      </div>
-    </article>
+      </figcaption>
+    </figure>
   );
 }
 

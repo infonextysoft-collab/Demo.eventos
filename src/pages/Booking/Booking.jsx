@@ -1,9 +1,20 @@
-import { createSignal } from "solid-js";
+import { For, createSignal } from "solid-js";
 
 import SectionTitle from "../../components/SectionTitle/SectionTitle";
+import { services } from "../../data/services";
 import { createBookingWhatsAppLink } from "../../utils/whatsapp";
 
 import "./Booking.css";
+
+const eventTypes = [
+  "Cumpleaños",
+  "Baby shower",
+  "Aniversario",
+  "Pedida de mano",
+  "Bautizo",
+  "Corporativo",
+  "Otro",
+];
 
 function Booking() {
   const [formData, setFormData] = createSignal({
@@ -15,6 +26,8 @@ function Booking() {
     budget: "",
     message: "",
   });
+
+  const today = new Date().toISOString().split("T")[0];
 
   const updateField = (field, value) => {
     setFormData((current) => ({
@@ -31,12 +44,12 @@ function Booking() {
   };
 
   return (
-    <section class="booking-page section-padding">
+    <section class="section-padding">
       <div class="page-container">
         <SectionTitle
           label="Reservar"
-          title="Solicita una cotización para tu evento"
-          description="Completa los datos principales y enviaremos tu solicitud por WhatsApp para coordinar una propuesta personalizada."
+          title="Solicita una cotización"
+          description="Completa los datos principales y enviaremos tu solicitud por WhatsApp para coordinar una propuesta."
           center
         />
 
@@ -44,28 +57,31 @@ function Booking() {
           <form class="booking-form" onSubmit={handleSubmit}>
             <div class="booking-form__grid">
               <div class="booking-form__field">
-                <label for="eventType">Tipo de evento</label>
+                <label for="eventType">
+                  Tipo de evento <span aria-hidden="true">*</span>
+                </label>
                 <select
                   id="eventType"
+                  required
                   value={formData().eventType}
                   onChange={(e) => updateField("eventType", e.currentTarget.value)}
                 >
                   <option value="">Seleccionar</option>
-                  <option value="Cumpleaños">Cumpleaños</option>
-                  <option value="Baby shower">Baby shower</option>
-                  <option value="Aniversario">Aniversario</option>
-                  <option value="Pedida de mano">Pedida de mano</option>
-                  <option value="Bautizo">Bautizo</option>
-                  <option value="Corporativo">Corporativo</option>
-                  <option value="Otro">Otro</option>
+                  <For each={eventTypes}>
+                    {(type) => <option value={type}>{type}</option>}
+                  </For>
                 </select>
               </div>
 
               <div class="booking-form__field">
-                <label for="eventDate">Fecha del evento</label>
+                <label for="eventDate">
+                  Fecha del evento <span aria-hidden="true">*</span>
+                </label>
                 <input
                   id="eventDate"
                   type="date"
+                  required
+                  min={today}
                   value={formData().eventDate}
                   onInput={(e) => updateField("eventDate", e.currentTarget.value)}
                 />
@@ -76,7 +92,7 @@ function Booking() {
                 <input
                   id="location"
                   type="text"
-                  placeholder="Ejemplo: Trujillo, local, domicilio..."
+                  placeholder="Ej.: Trujillo, local, domicilio"
                   value={formData().location}
                   onInput={(e) => updateField("location", e.currentTarget.value)}
                 />
@@ -88,25 +104,24 @@ function Booking() {
                   id="guests"
                   type="number"
                   min="1"
-                  placeholder="Ejemplo: 30"
+                  placeholder="Ej.: 30"
                   value={formData().guests}
                   onInput={(e) => updateField("guests", e.currentTarget.value)}
                 />
               </div>
 
               <div class="booking-form__field">
-                <label for="service">Servicio deseado</label>
+                <label for="service">Servicio de interés</label>
                 <select
                   id="service"
                   value={formData().service}
                   onChange={(e) => updateField("service", e.currentTarget.value)}
                 >
                   <option value="">Seleccionar</option>
-                  <option value="Mesa temática">Mesa temática</option>
-                  <option value="Arreglo con globos">Arreglo con globos</option>
-                  <option value="Decoración completa">Decoración completa</option>
-                  <option value="Caja sorpresa">Caja sorpresa</option>
-                  <option value="Paquete personalizado">Paquete personalizado</option>
+                  <For each={services}>
+                    {(item) => <option value={item.nombre}>{item.nombre}</option>}
+                  </For>
+                  <option value="Aún no lo sé">Aún no lo sé</option>
                 </select>
               </div>
 
@@ -115,7 +130,7 @@ function Booking() {
                 <input
                   id="budget"
                   type="text"
-                  placeholder="Ejemplo: S/ 300"
+                  placeholder="Ej.: S/ 300"
                   value={formData().budget}
                   onInput={(e) => updateField("budget", e.currentTarget.value)}
                 />
@@ -126,23 +141,24 @@ function Booking() {
               <label for="message">Comentario adicional</label>
               <textarea
                 id="message"
-                rows="5"
-                placeholder="Cuéntanos colores, temática, referencias o detalles especiales..."
+                rows="4"
+                placeholder="Colores, temática, referencias o detalles especiales"
                 value={formData().message}
                 onInput={(e) => updateField("message", e.currentTarget.value)}
               ></textarea>
             </div>
 
-            <button type="submit" class="booking-form__button">
-              Enviar cotización por WhatsApp
+            <button type="submit" class="btn btn-whatsapp btn-block">
+              Enviar solicitud por WhatsApp
             </button>
+
+            <p class="booking-form__hint">* Campos obligatorios</p>
           </form>
 
           <aside class="booking-info">
-            <span>Atención personalizada</span>
-            <h2>Antes de cotizar, ten en cuenta:</h2>
+            <h2>Antes de cotizar</h2>
 
-            <ul>
+            <ul class="check-list">
               <li>La fecha del evento ayuda a verificar disponibilidad.</li>
               <li>El lugar permite calcular logística y montaje.</li>
               <li>El presupuesto ayuda a recomendar una opción adecuada.</li>
@@ -150,11 +166,8 @@ function Booking() {
             </ul>
 
             <div class="booking-info__box">
-              <strong>Respuesta rápida</strong>
-              <p>
-                Te responderemos por WhatsApp para confirmar detalles,
-                disponibilidad y propuesta.
-              </p>
+              <strong>Horario de atención</strong>
+              <p>Lunes a sábado, de 9:00 a.m. a 8:00 p.m.</p>
             </div>
           </aside>
         </div>

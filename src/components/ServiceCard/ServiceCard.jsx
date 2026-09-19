@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import { createServiceWhatsAppLink } from "../../utils/whatsapp";
+import { createServiceWhatsAppLink, formatPrice } from "../../utils/whatsapp";
 
 import "./ServiceCard.css";
 
@@ -8,33 +8,28 @@ function ServiceCard(props) {
 
   return (
     <article class="service-card">
-      <A href={`/servicios/${service.id}`} class="service-card__image-box">
-        <img
-          src={service.imagen}
-          alt={service.nombre}
-          class="service-card__image"
-          loading="lazy"
-        />
-
-        {service.destacado && <span class="service-card__badge">Destacado</span>}
+      <A href={`/servicios/${service.id}`} class="service-card__image-box" tabIndex={-1}>
+        <img src={service.imagen} alt={service.nombre} loading="lazy" />
       </A>
 
       <div class="service-card__content">
-        <span class="service-card__category">{service.categoriaNombre}</span>
-
-        <A href={`/servicios/${service.id}`} class="service-card__title">
-          {service.nombre}
-        </A>
+        <h3>
+          <A href={`/servicios/${service.id}`} class="service-card__title">
+            {service.nombre}
+          </A>
+        </h3>
 
         <p class="service-card__description">{service.descripcion}</p>
 
         <div class="service-card__meta">
-          <span>Desde S/ {service.precioDesde.toFixed(2)}</span>
+          <span>
+            Desde <strong>{formatPrice(service.precioDesde)}</strong>
+          </span>
           <span>{service.tiempo}</span>
         </div>
 
         <div class="service-card__actions">
-          <A href={`/servicios/${service.id}`} class="service-card__detail">
+          <A href={`/servicios/${service.id}`} class="btn btn-secondary btn-sm">
             Ver detalle
           </A>
 
@@ -42,7 +37,7 @@ function ServiceCard(props) {
             href={createServiceWhatsAppLink(service)}
             target="_blank"
             rel="noopener noreferrer"
-            class="service-card__whatsapp"
+            class="btn btn-whatsapp btn-sm"
           >
             Cotizar
           </a>

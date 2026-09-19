@@ -1,9 +1,8 @@
 import { A, useParams } from "@solidjs/router";
 import { For, Show } from "solid-js";
 
-import ServiceCard from "../../components/ServiceCard/ServiceCard";
 import { services } from "../../data/services";
-import { createServiceWhatsAppLink } from "../../utils/whatsapp";
+import { createServiceWhatsAppLink, formatPrice } from "../../utils/whatsapp";
 
 import "./ServiceDetail.css";
 
@@ -13,24 +12,13 @@ function ServiceDetail() {
   const service = () =>
     services.find((item) => String(item.id) === String(params.id));
 
-  const relatedServices = () => {
-    if (!service()) return [];
-
-    return services
-      .filter(
-        (item) =>
-          item.categoria === service().categoria && item.id !== service().id
-      )
-      .slice(0, 3);
-  };
-
   return (
-    <section class="service-detail-page section-padding">
+    <section class="section-padding">
       <div class="page-container">
         <Show
           when={service()}
           fallback={
-            <div class="service-detail-page__not-found">
+            <div class="service-detail-not-found">
               <h1>Servicio no encontrado</h1>
               <p>El servicio que buscas no está disponible actualmente.</p>
 
@@ -42,55 +30,45 @@ function ServiceDetail() {
         >
           {(selectedService) => (
             <>
-              <div class="service-detail">
-                <div class="service-detail__image fade-up">
-                  <img
-                    src={selectedService().imagen}
-                    alt={selectedService().nombre}
-                  />
+              <A href="/servicios" class="service-detail__back">
+                ← Volver a servicios
+              </A>
 
-                  {selectedService().destacado && (
-                    <span class="service-detail__badge">Destacado</span>
-                  )}
+              <div class="service-detail">
+                <div class="service-detail__image">
+                  <img src={selectedService().imagen} alt={selectedService().nombre} />
                 </div>
 
-                <div class="service-detail__content fade-up">
-                  <span class="service-detail__category">
-                    {selectedService().categoriaNombre}
-                  </span>
-
+                <div class="service-detail__content">
                   <h1>{selectedService().nombre}</h1>
 
                   <p class="service-detail__description">
                     {selectedService().descripcionCompleta}
                   </p>
 
-                  <div class="service-detail__price">
-                    <span>Precio desde</span>
-                    <strong>S/ {selectedService().precioDesde.toFixed(2)}</strong>
-                  </div>
-
-                  <div class="service-detail__info">
+                  <dl class="service-detail__info">
                     <div>
-                      <span>Tiempo estimado</span>
-                      <strong>{selectedService().tiempo}</strong>
+                      <dt>Precio desde</dt>
+                      <dd class="service-detail__price">
+                        {formatPrice(selectedService().precioDesde)}
+                      </dd>
                     </div>
 
                     <div>
-                      <span>Reserva sugerida</span>
-                      <strong>{selectedService().reserva}</strong>
+                      <dt>Tiempo estimado</dt>
+                      <dd>{selectedService().tiempo}</dd>
                     </div>
 
                     <div>
-                      <span>Cotización</span>
-                      <strong>WhatsApp</strong>
+                      <dt>Reserva sugerida</dt>
+                      <dd>{selectedService().reserva}</dd>
                     </div>
-                  </div>
+                  </dl>
 
                   <div class="service-detail__block">
-                    <h3>¿Qué incluye?</h3>
+                    <h2>¿Qué incluye?</h2>
 
-                    <ul>
+                    <ul class="check-list">
                       <For each={selectedService().incluye}>
                         {(item) => <li>{item}</li>}
                       </For>
@@ -98,13 +76,13 @@ function ServiceDetail() {
                   </div>
 
                   <div class="service-detail__block">
-                    <h3>Opciones de personalización</h3>
+                    <h2>Opciones de personalización</h2>
 
-                    <div class="service-detail__chips">
+                    <ul class="service-detail__tags">
                       <For each={selectedService().personalizacion}>
-                        {(item) => <span>{item}</span>}
+                        {(item) => <li>{item}</li>}
                       </For>
-                    </div>
+                    </ul>
                   </div>
 
                   <div class="service-detail__actions">
@@ -114,27 +92,15 @@ function ServiceDetail() {
                       rel="noopener noreferrer"
                       class="btn btn-whatsapp"
                     >
-                      Cotizar este servicio
+                      Cotizar por WhatsApp
                     </a>
 
                     <A href="/reservar" class="btn btn-secondary">
-                      Ir a reservar
+                      Solicitar cotización
                     </A>
                   </div>
                 </div>
               </div>
-
-              <Show when={relatedServices().length > 0}>
-                <div class="service-detail-related">
-                  <h2>Servicios relacionados</h2>
-
-                  <div class="service-detail-related__grid">
-                    <For each={relatedServices()}>
-                      {(item) => <ServiceCard service={item} />}
-                    </For>
-                  </div>
-                </div>
-              </Show>
             </>
           )}
         </Show>

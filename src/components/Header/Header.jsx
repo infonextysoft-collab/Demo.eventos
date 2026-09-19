@@ -13,19 +13,16 @@ function Header() {
     <header class="header">
       <div class="header__container">
         <A href="/" class="header__logo" onClick={closeMenu}>
-          <div class="header__logo-icon">E</div>
-
-          <div>
-            <span class="header__brand">Elegance Events</span>
-            <small class="header__tagline">Detalles para eventos</small>
-          </div>
+          <span class="header__logo-icon" aria-hidden="true">E</span>
+          <span class="header__brand">Elegance Events</span>
         </A>
 
         <button
           type="button"
           class="header__menu-btn"
           onClick={() => setMenuOpen(!menuOpen())}
-          aria-label="Abrir menú"
+          aria-label={menuOpen() ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuOpen()}
         >
           <span></span>
           <span></span>
@@ -57,7 +54,7 @@ function Header() {
             href={createGeneralWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
-            class="header__whatsapp"
+            class="btn btn-whatsapp btn-sm header__whatsapp"
             onClick={closeMenu}
           >
             WhatsApp
